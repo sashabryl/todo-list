@@ -7,13 +7,17 @@ class TaskForm(forms.ModelForm):
     tags = forms.ModelMultipleChoiceField(
         queryset=Tag.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=False
+        required=False,
     )
     deadline = forms.DateTimeField(
         widget=forms.DateTimeInput(attrs={"type": "datetime-local"}),
-        required=False
+        required=False,
     )
 
     class Meta:
         model = Task
-        fields = ("content", "deadline", "tags",)
+        fields = (
+            "content",
+            "deadline",
+            "tags",
+        )

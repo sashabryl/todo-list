@@ -9,10 +9,14 @@
   {% for task in task_list %}
   <li class="list-group-item">
     <span class="fw-bold ">{{ task.content }} | </span>
-    {% if task.is_done %} <span class="text-success fw-bold fs-5">Done</span>
-    <a href="{% url 'todo:task-complete-undo' task.id %}" class="btn btn-secondary" style="float: right;">Undo</a>
+    {% if task.is_done %}
+    <span class="text-success fw-bold fs-5">Done</span>
+    <a href="{% url 'todo:task-complete-undo' task.id %}"
+       class="btn btn-secondary" style="float: right;">Undo</a>
     {% else %} <span class="text-danger fw-bold fs-5">Not done</span>
-    <a href="{% url 'todo:task-complete-undo' task.id %}" class="btn btn-success" style="float: right;">Complete</a> {% endif %}
+    <a href="{% url 'todo:task-complete-undo' task.id %}"
+       class="btn btn-success" style="float: right;">Complete</a>
+    {% endif %}
     <br>
     <p>Created at: {{ task.created_at }}, <span class="text-italic">deadline: {{ task.deadline }}</span></p> <br>
     <h6>Tags: {% for tag in task.tags.all %} {{ tag }} | {% empty %} No tags {% endfor %}</h6>
