@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="text-center m-5">
+    <h2>Delete {{ object }}?</h2>
+    <h5 class="fw-bold mb-5">It's for good!</h5>
+    <form action="" method="post">
+      {% csrf_token %}
+      <input type="submit" class="btn btn-outline-danger btn-lg m-3" value="Confirm"> <br>
+      <button onclick="history.back()" class="btn btn-outline-secondary">Cancel</button>
+    </form>
+  </div>
+{% endblock %}
