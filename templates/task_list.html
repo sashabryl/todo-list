@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between">
+  <h1 class="m-3 border-3 border-bottom border-primary">Home</h1>
+  <a href="{% url 'todo:task-create' %}" class="btn btn-primary btn-lg">Add a task</a>
+</div>
+  <h2 class="m-2">All tasks</h2>
+<ul class="list-group list-group-flush">
+  {% for task in task_list %}
+  <li class="list-group-item">
+    <span class="fw-bold ">{{ task.content }} | </span>
+    {% if task.is_done %}
+    <span class="text-success fw-bold fs-5">Done</span>
+    <a href="{% url 'todo:task-complete-undo' task.id %}"
+       class="btn btn-secondary" style="float: right;">Undo</a>
+    {% else %} <span class="text-danger fw-bold fs-5">Not done</span>
+    <a href="{% url 'todo:task-complete-undo' task.id %}"
+       class="btn btn-success" style="float: right;">Complete</a>
+    {% endif %}
+    <br>
+    <p>Created at: {{ task.created_at }}, <span class="text-italic">deadline: {{ task.deadline }}</span></p> <br>
+    <h6>Tags: {% for tag in task.tags.all %} {{ tag }} | {% empty %} No tags {% endfor %}</h6>
+    <a href="{% url 'todo:task-update' task.id %}" class="btn btn-secondary m-3">Edit</a>
+    <a href="{% url 'todo:task-delete' task.id %}" class="btn btn-danger">Delete</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
